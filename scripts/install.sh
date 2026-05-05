@@ -2,7 +2,7 @@
 
 set -e
 
-DOTFILES="$HOME/dotfiles"
+DOTFILES="$HOME/.dotfiles"
 
 ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
@@ -16,7 +16,7 @@ elif grep -qi microsoft /proc/version 2>/dev/null; then
 else
   export DOTFILES_OS="linux"
 fi
-
+echo "Starting Configuration"
 echo "Detected OS: $DOTFILES_OS"
 
 if [[ "$DOTFILES_OS" == "macos" ]]; then
@@ -47,6 +47,16 @@ if [[ "$DOTFILES_OS" == "macos" ]]; then
   else
     echo "Nerd Fonts already installed."
   fi
+
+# Install GitHub CLI
+  if ! command -v gh &> /dev/null; then
+    echo "Installing GitHub CLI..."
+    brew install gh
+    echo "GitHub CLI installed."
+  else
+    echo "GitHub CLI already installed."
+  fi
+
 fi
 
 if [[ "$DOTFILES_OS" == "wsl" ]]; then
@@ -57,4 +67,23 @@ if [[ "$DOTFILES_OS" == "wsl" ]]; then
   echo "Installing Nerd Fonts..."
   sudo apt install -y fonts-jetbrains-mono-nerd-font
   echo "Nerd Fonts installed."
+  echo "Installing Git and GitHub CLI..."
+  sudo apt install -y git gh
+  echo "Git and GitHub CLI installed."
+  
+fi
+
+# Git configuration
+git config --global user.email "marknhenry@live.com"
+git config --global user.name "Mark Henry"
+git config --global pull.rebase false
+git config --global init.defaultBranch main
+echo "Git configured with user.name and user.email."
+
+# Zinit Installation
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    echo "Installing Zinit..."
+    mkdir -p "$HOME/.local/share/zinit" && chmod g-rwX "$HOME/.local/share/zinit"
+    bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+    echo "Zinit installed."
 fi

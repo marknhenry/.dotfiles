@@ -10,3 +10,5 @@
 	defaultBranch = main
 [core]
 	editor = code --wait
+[pull]
+	rebase = false
