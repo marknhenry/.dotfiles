@@ -6,6 +6,7 @@ DOTFILES="$HOME/.dotfiles"
 
 ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$DOTFILES/p10k/.p10k.zsh" "$HOME/.p10k.zsh"
 
 echo "Dotfiles installed."
 
@@ -64,9 +65,9 @@ if [[ "$DOTFILES_OS" == "wsl" ]]; then
   sudo apt update
   sudo apt install -y eza
   echo "eza installed."
-  echo "Installing Nerd Fonts..."
-  sudo apt install -y fonts-jetbrains-mono-nerd-font
-  echo "Nerd Fonts installed."
+  # echo "Installing Nerd Fonts..."
+  # sudo apt install -y fonts-jetbrains-mono-nerd-font
+  # echo "Nerd Fonts installed."
   echo "Installing Git and GitHub CLI..."
   sudo apt install -y git gh
   echo "Git and GitHub CLI installed."
@@ -89,3 +90,12 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
 fi
 
 source "$HOME/.zshrc"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
