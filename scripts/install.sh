@@ -71,7 +71,9 @@ if [[ "$DOTFILES_OS" == "wsl" ]]; then
   echo "Installing Git and GitHub CLI..."
   sudo apt install -y git gh
   echo "Git and GitHub CLI installed."
-  
+  echo "Installing fzf..."
+  sudo apt install -y fzf
+  echo "fzf installed."
 fi
 
 # Git configuration
@@ -92,10 +94,10 @@ fi
 source "$HOME/.zshrc"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# # Add in Powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+# # Add in zsh plugins
+# zinit light zsh-users/zsh-syntax-highlighting
+# zinit light zsh-users/zsh-completions
+# zinit light zsh-users/zsh-autosuggestions
