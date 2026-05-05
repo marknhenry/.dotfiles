@@ -74,6 +74,9 @@ if [[ "$DOTFILES_OS" == "wsl" ]]; then
   echo "Installing fzf..."
   sudo apt install -y fzf
   echo "fzf installed."
+  echo "Installing zoxide..."
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+  echo "zoxide installed."
 fi
 
 # Git configuration

@@ -22,6 +22,7 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la --color $realpath --group-directories-first'
 
 # Detect OS
 
@@ -83,6 +84,8 @@ zinit light Aloxaf/fzf-tab
 
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
+zinit cdreplay -q
+
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -103,4 +106,12 @@ fi
 
 if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
   source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
+# Local user binaries
+export PATH="$HOME/.local/bin:$PATH"
+
+# zoxide
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
 fi
